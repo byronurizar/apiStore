@@ -1,6 +1,6 @@
 'use strict'
-const Genero = use('App/Models/CatGenero');
-class GeneroController {
+const Rol = use('App/Models/CatRol');
+class RolController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
         let codigo = 0;
@@ -10,7 +10,7 @@ class GeneroController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Genero.all();
+            data = await Rol.all();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -33,16 +33,17 @@ class GeneroController {
         let respuesta = '';
         let data = null;
 
-        const genero = new Genero();
+        const rol = new Rol();
         try {
             const usuario = await auth.getUser();
-            const { descripcion } = request.all();
-            genero.fill({
-                descripcion
+            const {descripcion, idEstado } = request.all();
+            rol.fill({
+                descripcion,
+                idEstado
             });
-            await usuario.generos().save(genero);
-            respuesta = 'Género registrado exitosamente'
-            data = genero;
+            await usuario.roles().save(rol);
+            respuesta = 'Rol registrado exitosamente'
+            data = rol;
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -66,12 +67,12 @@ class GeneroController {
         try {
             const usuario = await auth.getUser();
             const { id } = params;
-            const genero = await Genero.find(id);
-            await genero.merge(request.only(['descripcion']));
+            const rol = await Rol.find(id);
+            await rol.merge(request.only(['descripcion', 'idEstado']));
 
-            await genero.save();
-            data = genero;
-            respuesta = 'Género actualizado exitosamente';
+            await rol.save();
+            data = rol;
+            respuesta = 'Rol actualizado exitosamente';
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -89,4 +90,4 @@ class GeneroController {
     }
 }
 
-module.exports = GeneroController
+module.exports = RolController

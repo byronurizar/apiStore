@@ -1,6 +1,6 @@
 'use strict'
-const Genero = use('App/Models/CatGenero');
-class GeneroController {
+const Deptartamento = use('App/Models/CatDepartamento');
+class DepartamentoController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
         let codigo = 0;
@@ -10,7 +10,7 @@ class GeneroController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Genero.all();
+            data = await Deptartamento.all();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -33,16 +33,17 @@ class GeneroController {
         let respuesta = '';
         let data = null;
 
-        const genero = new Genero();
+        const departamento = new Deptartamento();
         try {
             const usuario = await auth.getUser();
-            const { descripcion } = request.all();
-            genero.fill({
-                descripcion
+            const { descripcion,idEstado } = request.all();
+            departamento.fill({
+                descripcion,
+                idEstado
             });
-            await usuario.generos().save(genero);
-            respuesta = 'Género registrado exitosamente'
-            data = genero;
+            await usuario.departamentos().save(departamento);
+            respuesta = 'Departamento registrado exitosamente'
+            data = departamento;
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -66,12 +67,12 @@ class GeneroController {
         try {
             const usuario = await auth.getUser();
             const { id } = params;
-            const genero = await Genero.find(id);
-            await genero.merge(request.only(['descripcion']));
+            const departamento = await Deptartamento.find(id);
+            await departamento.merge(request.only(['descripcion','idEstado']));
 
-            await genero.save();
-            data = genero;
-            respuesta = 'Género actualizado exitosamente';
+            await departamento.save();
+            data = departamento;
+            respuesta = 'Departamento actualizado exitosamente';
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -89,4 +90,4 @@ class GeneroController {
     }
 }
 
-module.exports = GeneroController
+module.exports = DepartamentoController

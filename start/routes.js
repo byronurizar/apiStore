@@ -21,6 +21,33 @@ Route.get('/', () => {
 })
 
 Route.group(() => {
+  //Estados
+  Route.post('estados/registro', 'EstadoController.registrar');
+  Route.patch('estados/actualizar/:id', 'EstadoController.actualizar');
+  Route.delete('estados/eliminar/:id', 'EstadoController.eliminar');
+  Route.get('estados/listar', 'EstadoController.listar');
+
+  //Generos
+  Route.post('generos/registro', 'GeneroController.registrar');
+  Route.patch('generos/actualizar/:id', 'GeneroController.actualizar');
+  Route.get('generos/listar', 'GeneroController.listar');
+
+   //Departamentos
+   Route.post('departamentos/registro', 'DepartamentoController.registrar');
+   Route.patch('departamentos/actualizar/:id', 'DepartamentoController.actualizar');
+   Route.get('departamentos/listar', 'DepartamentoController.listar');
+
+   //Municipios
+   Route.post('municipios/registro', 'MunicipioController.registrar');
+   Route.patch('municipios/actualizar/:id', 'MunicipioController.actualizar');
+   Route.get('municipios/listar', 'MunicipioController.listar');
+   Route.get('municipios/listar/departamento/:id', 'MunicipioController.municipiosDepartamento');
+
+   //Roles
+   Route.post('roles/registro', 'RolController.registrar');
+   Route.patch('roles/actualizar/:id', 'RolController.actualizar');
+   Route.get('roles/listar', 'RolController.listar');
+
 
   Route.post('usuario/registro', 'UsuarioController.store');
   Route.post('usuario/login', 'UsuarioController.login');
@@ -28,7 +55,6 @@ Route.group(() => {
   Route.post('genero', 'GeneroController.create');
   Route.get('genero', 'GeneroController.index');
 
-  Route.post('estados/registro', 'EstadoController.registrar');
 
-  Route.get('estados', 'EstadoController.index');
+
 }).prefix('apiStore/v1/');

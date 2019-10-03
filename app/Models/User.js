@@ -37,6 +37,18 @@ class User extends Model {
   estados(){
     return this.hasMany('App/Models/CatEstado')
   }
+  generos(){
+    return this.hasMany('App/Models/CatGenero')
+  }
+  departamentos(){
+    return this.hasMany('App/Models/CatDepartamento')
+  }
+  municipios(){
+    return this.hasMany('App/Models/CatMunicipio')
+  }
+  roles(){
+    return this.hasMany('App/Models/CatRol')
+  }
 }
 
 module.exports = User

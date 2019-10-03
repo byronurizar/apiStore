@@ -1,6 +1,6 @@
 'use strict'
-const Genero = use('App/Models/CatGenero');
-class GeneroController {
+const Municipio = use('App/Models/CatMunicipio');
+class MunicipioController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
         let codigo = 0;
@@ -10,7 +10,33 @@ class GeneroController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Genero.all();
+            data = await Municipio.all();
+        } catch (err) {
+            codigoHttp = 500;
+            codigo = -1;
+            error = err.message;
+            respuesta = 'Ocurrió un error al realizar la acción solicitada';
+            data = null;
+        }
+
+        return response.status(codigoHttp).json({
+            codigo,
+            error,
+            respuesta,
+            data
+        });
+    }
+    async municipiosDepartamento({ auth, params, response }) {
+        let codigoHttp = 200;
+        let codigo = 0;
+        let error = '';
+        let respuesta = '';
+        let data = null;
+
+        const usuario = await auth.getUser();
+        try {
+            const { id } = params;
+            data = await Municipio.query().where('idDepartamento', '=', id).fetch();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -33,16 +59,18 @@ class GeneroController {
         let respuesta = '';
         let data = null;
 
-        const genero = new Genero();
+        const municipio = new Municipio();
         try {
             const usuario = await auth.getUser();
-            const { descripcion } = request.all();
-            genero.fill({
-                descripcion
+            const { idDepartamento, descripcion, idEstado } = request.all();
+            municipio.fill({
+                idDepartamento,
+                descripcion,
+                idEstado
             });
-            await usuario.generos().save(genero);
-            respuesta = 'Género registrado exitosamente'
-            data = genero;
+            await usuario.municipios().save(municipio);
+            respuesta = 'Municipio registrado exitosamente'
+            data = municipio;
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -66,12 +94,12 @@ class GeneroController {
         try {
             const usuario = await auth.getUser();
             const { id } = params;
-            const genero = await Genero.find(id);
-            await genero.merge(request.only(['descripcion']));
+            const municipio = await Municipio.find(id);
+            await municipio.merge(request.only(['idDepartamento', 'descripcion', 'idEstado']));
 
-            await genero.save();
-            data = genero;
-            respuesta = 'Género actualizado exitosamente';
+            await municipio.save();
+            data = municipio;
+            respuesta = 'Municipio actualizado exitosamente';
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -89,4 +117,4 @@ class GeneroController {
     }
 }
 
-module.exports = GeneroController
+module.exports = MunicipioController

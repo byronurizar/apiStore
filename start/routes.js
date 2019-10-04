@@ -66,5 +66,38 @@ Route.group(() => {
   Route.post('proveedores/telefonos/registro', 'TelefonoProveedorController.registrar');
   Route.patch('proveedores/telefonos/actualizar/:id', 'TelefonoProveedorController.actualizar');
   Route.get('proveedores/telefonos/listar/:id', 'TelefonoProveedorController.listar');
-  
+
+  //Productos
+  Route.post('productos/registro', 'ProductoController.registrar');
+  Route.patch('productos/actualizar/:id', 'ProductoController.actualizar');
+  Route.get('productos/listar', 'ProductoController.listar');
+  Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
+  Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
+
+  //Info Adicional Producto
+  Route.post('productos/infoadicional/registro', 'InfoAdicionalProductoController.registrar');
+  Route.patch('productos/infoadicional/actualizar/:id', 'InfoAdicionalProductoController.actualizar');
+  Route.get('productos/infoadicional/listar/producto/:id', 'InfoAdicionalProductoController.listar');
+
+  //Etiquetas
+  Route.post('etiquetas/registro', 'EtiquetaController.registrar');
+  Route.patch('etiquetas/actualizar/:id', 'EtiquetaController.actualizar');
+  Route.get('etiquetas/listar', 'EtiquetaController.listar');
+
+  //Etiquetas a Producto
+  Route.post('etiquetasproducto/registro', 'EtiquetaProductoController.registrar');
+  Route.patch('etiquetasproducto/actualizar/:id', 'EtiquetaProductoController.actualizar');
+  Route.get('etiquetasproducto/listar/producto/:id', 'EtiquetaProductoController.listar');
+
+  //Tallas
+  Route.post('tallas/registro', 'TallaProductoController.registrar');
+  Route.patch('tallas/actualizar/:id', 'TallaProductoController.actualizar');
+  Route.get('tallas/listar', 'TallaProductoController.listar');
+  Route.get('tallas/listar/producto/:id', 'TallaProductoController.tallaProducto');
+
+  //Stock Producto
+  Route.post('productos/stock/registro', 'StockProductoController.registrar');
+  Route.patch('productos/stock/actualizar/:id', 'StockProductoController.actualizar');
+  Route.get('productos/stock/listar', 'StockProductoController.listar');
+
 }).prefix('apiStore/v1/');

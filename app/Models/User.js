@@ -58,6 +58,24 @@ class User extends Model {
   telefonosProveedor(){
     return this.hasMany('App/Models/CatTelefonoProveedor')
   }
+  productos(){
+    return this.hasMany('App/Models/Producto')
+  }
+  infoAdicionalProductos(){
+    return this.hasMany('App/Models/InfoAdicionalProducto')
+  }
+  etiquetas(){
+    return this.hasMany('App/Models/CatEtiqueta')
+  }
+  etiquetasProductos(){
+    return this.hasMany('App/Models/CatEtiquetaProducto')
+  }
+  tallas(){
+    return this.hasMany('App/Models/TallaProducto')
+  }
+  stockProducto(){
+    return this.hasMany('App/Models/StockProducto')
+  }
 }
 
 module.exports = User

@@ -82,6 +82,39 @@ class User extends Model {
   imagenesProducto(){
     return this.hasMany('App/Models/ImagenProducto')
   }
+  catalogos(){
+    return this.hasMany('App/Models/Catalogo')
+  }
+  productosCruzados(){
+    return this.hasMany('App/Models/ProductoCruzado')
+  }
+  detalleProductoCruzado(){
+    return this.hasMany('App/Models/DetalleProductoCruzado')
+  }
+  personas(){
+    return this.hasMany('App/Models/Persona')
+  }
+  telefonosPersona(){
+    return this.hasMany('App/Models/TelefonoPersona')
+  }
+  direccionesPersona(){
+    return this.hasMany('App/Models/DireccionPersona')
+  }
+  estadosPedido(){
+    return this.hasMany('App/Models/CatEstadoPedido')
+  }
+  tiposPago(){
+    return this.hasMany('App/Models/CatTipoPago')
+  }
+  pedidos(){
+    return this.hasMany('App/Models/Pedido')
+  }
+  detallePedido(){
+    return this.hasMany('App/Models/DetallePedido')
+  }
+  detalleTipoPago(){
+    return this.hasMany('App/Models/DetalleTipoPago')
+  }
 }
 
 module.exports = User

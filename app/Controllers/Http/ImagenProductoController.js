@@ -1,4 +1,5 @@
 'use strict'
+const Producto = use('App/Models/Producto');
 const ImagenProducto = use('App/Models/ImagenProducto');
 const Database = use('Database');
 class ImagenProductoController {
@@ -47,7 +48,7 @@ class ImagenProductoController {
                 )
                 .from('productos')
                 .innerJoin('imagen_productos', 'productos.id', 'imagen_productos.idProducto')
-                .where({ 'productos.idEstado': 1,'imagen_productos.idEstado': 1, "productos.id": id })
+                .where({ 'productos.idEstado': 1, 'imagen_productos.idEstado': 1, "productos.id": id })
 
         } catch (err) {
             codigoHttp = 500;
@@ -75,18 +76,47 @@ class ImagenProductoController {
         try {
             const usuario = await auth.getUser();
             const { idProducto, esImagenPrincipal, idEstado } = request.all();
-            const pathImagen='Pendiente de asignar';
-            const codigoImagen="pendienteAsignar";
-            imagenProducto.fill({
-                idProducto,
-                pathImagen,
-                codigoImagen,
-                esImagenPrincipal,
-                idEstado
+            const id = idProducto;
+            const producto = await Producto.find(id);
+            const { idProveedor, idCategoria } = producto;
+            const fechaActual = new Date();
+            const anio = fechaActual.getFullYear();
+            const pathImagen = `Imagenes/${anio}/Pro${idProveedor}/Cat${idCategoria}/`;
+            const extension = '.jpg';
+            const codigoImagen = `${idProveedor}${idCategoria}${Date.now()}${extension}`;
+
+
+
+            const BinarioImagen = request.file('imagen', {
+                types: ['image'],
+                size: '2mb',
+                extnames: ['png', 'jpg', 'jpeg']
             });
-            await usuario.tallas().save(imagenProducto);
-            respuesta = 'Imagen registrada exitosamente'
-            data = imagenProducto;
+
+            await BinarioImagen.move(`./${pathImagen}`, {
+                name: codigoImagen,
+                overwrite: true
+            });
+
+
+            if (!BinarioImagen.moved()) {
+                codigoHttp = 500;
+                codigo = -1;
+                error = "No se logró cargar la imagen";
+                respuesta = 'Ocurrió un error al realizar la acción solicitada';
+                data = null;
+            } else {
+                imagenProducto.fill({
+                    idProducto,
+                    pathImagen,
+                    codigoImagen,
+                    esImagenPrincipal,
+                    idEstado
+                });
+                await usuario.tallas().save(imagenProducto);
+                respuesta = 'Imagen registrada exitosamente'
+                data = imagenProducto;
+            }
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -111,11 +141,46 @@ class ImagenProductoController {
             const usuario = await auth.getUser();
             const { id } = params;
             const imagenProducto = await ImagenProducto.find(id);
-            await imagenProducto.merge(request.only(['idProducto','esImagenPrincipal','idEstado']));
 
-            await imagenProducto.save();
-            data = imagenProducto;
-            respuesta = 'Imagen actualizada exitosamente';
+            const { idProducto } = imagenProducto;
+
+            const producto = await Database.select('*').from('productos').where({ id: idProducto });
+
+            //  const { idProveedor, idCategoria } = producto;
+            console.log('Producto', producto);
+            const idProveedor = producto[0].idProveedor;
+            const idCategoria = producto[0].idCategoria
+            const fechaActual = new Date();
+            const anio = fechaActual.getFullYear();
+            const pathImagen = `Imagenes/${anio}/Pro${idProveedor}/Cat${idCategoria}/`;
+            const extension = '.jpg';
+            const codigoImagen = `${idProveedor}${idCategoria}${Date.now()}${extension}`;
+
+            const BinarioImagen = request.file('imagen', {
+                types: ['image'],
+                size: '2mb',
+                extnames: ['png', 'jpg', 'jpeg']
+            });
+
+            await BinarioImagen.move(`./${pathImagen}`, {
+                name: codigoImagen,
+                overwrite: true
+            });
+
+            if (!BinarioImagen.moved()) {
+                codigoHttp = 500;
+                codigo = -1;
+                error = "No se logró cargar la imagen";
+                respuesta = 'Ocurrió un error al realizar la acción solicitada';
+                data = null;
+            } else {
+
+                const { idProducto, esImagenPrincipal, idEstado } = request.all();
+                await imagenProducto.merge({ idProducto, esImagenPrincipal, idEstado, codigoImagen, pathImagen });
+                await imagenProducto.save();
+                data = imagenProducto;
+                respuesta = 'Imagen actualizada exitosamente';
+            }
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -130,60 +195,6 @@ class ImagenProductoController {
             data
         });
 
-    }
-    async cargarImagen({auth,request,response}){
-        try {
-
-            
-           
-            let user = await auth.getUser()
-    
-            const photo = request.file('imagen', {
-                types: ['image'],
-                size: '2mb',
-                extnames: ['png', 'gif', 'jpg', 'jpeg']
-            })
-    console.log(Date.now());
-            let filename ='prueba.jpg'; //`${user.id}.jpg`
-    
-            await photo.move(`./imagenes`, {
-                name: filename,
-                overwrite: true
-            })
-            //console.log("LLego",photo);
-    
-            if (!photo.moved()) {
-                return response.status(422).send({
-                    status: false,
-                    message: photo.error(),
-                    errors: photo.error()
-                })
-            }
-    
-            return response.status(200).send({
-                status: true,
-                message: 'Upload avatar ok.',
-                data: {
-                    filename
-                }
-            })
-    
-        } catch (e) {
-    
-            return response.status(500).send({
-                status: false,
-                message: e.message
-            })
-    
-        }
-
-        return response.status(codigoHttp).json({
-            codigo,
-            error,
-            respuesta,
-            data
-        });
-        
     }
 }
 

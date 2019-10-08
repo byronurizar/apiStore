@@ -36,10 +36,11 @@ class StockProductoController {
         const stockProducto = new StockProducto();
         try {
             const usuario = await auth.getUser();
-            const {idProducto,idTalla,stockDisponible,idEstado } = request.all();
+            const {idProducto,idTalla,idColor,stockDisponible,idEstado } = request.all();
             stockProducto.fill({
                 idProducto,
                 idTalla,
+                idColor,
                 stockDisponible,
                 idEstado
             });
@@ -70,7 +71,7 @@ class StockProductoController {
             const usuario = await auth.getUser();
             const { id } = params;
             const stockProducto = await StockProducto.find(id);
-            await stockProducto.merge(request.only(['idProducto','idTalla','stockDisponible','idEstado']));
+            await stockProducto.merge(request.only(['idProducto','idTalla','idColor','stockDisponible','idEstado']));
 
             await stockProducto.save();
             data = stockProducto;

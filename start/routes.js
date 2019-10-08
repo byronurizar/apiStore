@@ -95,9 +95,17 @@ Route.group(() => {
   Route.get('tallas/listar', 'TallaProductoController.listar');
   Route.get('tallas/listar/producto/:id', 'TallaProductoController.tallaProducto');
 
+  //Colores
+  Route.post('colores/registro', 'CatColoreController.registrar');
+  Route.patch('colores/actualizar/:id', 'CatColoreController.actualizar');
+  Route.get('colores/listar', 'CatColoreController.listar');
+  Route.get('colores/listar/producto/:id', 'CatColoreController.coloresProducto');
+  
   //Stock Producto
   Route.post('productos/stock/registro', 'StockProductoController.registrar');
   Route.patch('productos/stock/actualizar/:id', 'StockProductoController.actualizar');
   Route.get('productos/stock/listar', 'StockProductoController.listar');
+
+  
 
 }).prefix('apiStore/v1/');

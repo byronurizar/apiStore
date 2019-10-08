@@ -76,6 +76,9 @@ class User extends Model {
   stockProducto(){
     return this.hasMany('App/Models/StockProducto')
   }
+  colores(){
+    return this.hasMany('App/Models/CatColore')
+  }
 }
 
 module.exports = User

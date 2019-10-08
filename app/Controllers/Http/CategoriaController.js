@@ -42,7 +42,7 @@ class CategoriaController {
                 idEstado
             });
             await usuario.categorias().save(categoria);
-            respuesta = 'Categoria registrado exitosamente'
+            respuesta = 'Categoria registrada exitosamente'
             data = categoria;
         } catch (err) {
             codigoHttp = 500;
@@ -72,7 +72,7 @@ class CategoriaController {
 
             await categoria.save();
             data = categoria;
-            respuesta = 'Categoria actualizado exitosamente';
+            respuesta = 'Categoria actualizada exitosamente';
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

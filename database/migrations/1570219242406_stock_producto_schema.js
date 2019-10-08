@@ -9,6 +9,7 @@ class StockProductoSchema extends Schema {
       table.increments()
       table.integer('idProducto').unsigned().references('id').inTable('productos')
       table.integer('idTalla').defaultTo(0)
+      table.integer('idColor').defaultTo(0)
       table.integer('stockDisponible').defaultTo(0)
       table.integer('idEstado').unsigned().references('id').inTable('cat_estados')
       table.integer('user_id').unsigned().references('id').inTable('users')

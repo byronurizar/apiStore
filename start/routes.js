@@ -106,6 +106,15 @@ Route.group(() => {
   Route.patch('productos/stock/actualizar/:id', 'StockProductoController.actualizar');
   Route.get('productos/stock/listar', 'StockProductoController.listar');
 
-  
+   //Imagenes Producto
+   Route.post('productos/imagenes/registro', 'ImagenProductoController.registrar');
+   Route.patch('productos/imagenes/actualizar/:id', 'ImagenProductoController.actualizar');
+   Route.get('productos/imagenes/listar', 'ImagenProductoController.listar');
+   Route.get('productos/imagenes/producto/:id', 'ImagenProductoController.imagenesProducto');
+   Route.post('cargar', 'ImagenProductoController.cargarImagen');
+ 
+   
 
 }).prefix('apiStore/v1/');
+
+//Agregar que los productos estan amarrados a un catalogo y analizar lo de varios prdoductos en una imagen

@@ -7,14 +7,14 @@ class ProductoSchema extends Schema {
   up() {
     this.create('productos', (table) => {
       table.increments()
-      table.integer('idProveedor').unsigned().references('id').inTable('proveedors')
       table.integer('idCatalogo').unsigned().references('id').inTable('catalogos')
       table.integer('idProveedor').unsigned().references('id').inTable('proveedors')
+      table.integer('idCategoria').unsigned().references('id').inTable('cat_categorias')
       table.string('nombre', 100).notNullable()
       table.string('codigo', 100).notNullable().unique()
       table.string('descripcion', 500)
       table.string('descripcionCorta', 500)
-      table.decimal('precio', 500).notNullable()
+      table.decimal('precio').notNullable()
       table.integer('idEstado').unsigned().references('id').inTable('cat_estados')
       table.integer('user_id').unsigned().references('id').inTable('users')
       table.timestamps()

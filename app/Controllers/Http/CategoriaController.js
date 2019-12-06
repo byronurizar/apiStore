@@ -10,7 +10,13 @@ class CategoriaController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Categoria.all();
+            //data = await Categoria.all();
+             data = await Database
+                    .raw('select a.id,a.descripcion,b.descripcion as idEstado,a.idEstado ides from cat_categorias a inner join cat_estados b on a.idEstado=b.id where a.idEstado in(1,2,3)');
+                    Database.close();
+
+            // data=await Database.truncate('cat_estados')
+
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

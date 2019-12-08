@@ -1,5 +1,6 @@
 'use strict'
 const Municipio = use('App/Models/CatMunicipio');
+const Database = use('Database');
 class MunicipioController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class MunicipioController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Municipio.all();
+            // data = await Municipio.all();
+            data = await Database
+            .table('vistaMunicipios')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

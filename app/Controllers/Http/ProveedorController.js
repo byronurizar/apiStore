@@ -1,5 +1,6 @@
 'use strict'
-const Proveedor=use('App/Models/Proveedor');
+const Proveedor = use('App/Models/Proveedor');
+const Database = use('Database');
 class ProveedorController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class ProveedorController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Proveedor.all();
+            // data = await Proveedor.all();
+            data = await Database
+                .table('vistaProveedores')
+            Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -36,7 +40,7 @@ class ProveedorController {
         const proveedor = new Proveedor();
         try {
             const usuario = await auth.getUser();
-            const { nombre,descripcion,direccion, idEstado } = request.all();
+            const { nombre, descripcion, direccion, idEstado } = request.all();
             proveedor.fill({
                 nombre,
                 descripcion,
@@ -70,7 +74,7 @@ class ProveedorController {
             const usuario = await auth.getUser();
             const { id } = params;
             const proveedor = await Proveedor.find(id);
-            await proveedor.merge(request.only(['nombre','descripcion','direccion', 'idEstado']));
+            await proveedor.merge(request.only(['nombre', 'descripcion', 'direccion', 'idEstado']));
 
             await proveedor.save();
             data = proveedor;

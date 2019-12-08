@@ -172,6 +172,9 @@ Route.group(() => {
   Route.patch('pedido/detalle/actualizar/:id', 'DetallePedidoController.actualizar');
   Route.get('pedido/detalle/listar', 'DetallePedidoController.listar');
 
+  //Configuracion
+  Route.get('confi/vistas', 'CrearVistaController.crearVistas');
+
 }).prefix('apiStore/v1/');
 
 //Agregar que los productos estan amarrados a un catalogo y analizar lo de varios prdoductos en una imagen

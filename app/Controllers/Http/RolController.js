@@ -1,5 +1,6 @@
 'use strict'
 const Rol = use('App/Models/CatRol');
+const Database = use('Database');
 class RolController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class RolController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Rol.all();
+            // data = await Rol.all();
+            data = await Database
+            .table('vistaRoles')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

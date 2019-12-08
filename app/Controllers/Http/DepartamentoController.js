@@ -1,5 +1,6 @@
 'use strict'
 const Deptartamento = use('App/Models/CatDepartamento');
+const Database = use('Database');
 class DepartamentoController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class DepartamentoController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Deptartamento.all();
+            // data = await Deptartamento.all();
+            data = await Database
+            .table('vistaDepartamentos')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

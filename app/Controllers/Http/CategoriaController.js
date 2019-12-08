@@ -1,5 +1,6 @@
 'use strict'
 const Categoria = use('App/Models/CatCategoria');
+const Database = use('Database');
 class CategoriaController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -12,7 +13,7 @@ class CategoriaController {
         try {
             //data = await Categoria.all();
              data = await Database
-                    .raw('select a.id,a.descripcion,b.descripcion as idEstado,a.idEstado ides from cat_categorias a inner join cat_estados b on a.idEstado=b.id where a.idEstado in(1,2,3)');
+             .table('vistaCategorias')
                     Database.close();
 
             // data=await Database.truncate('cat_estados')

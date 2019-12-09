@@ -1,5 +1,6 @@
 'use strict'
 const TelefonoProveedor=use('App/Models/CatTelefonoProveedor');
+const Database=use('Database');
 class TelefonoProveedorController {
     async listar({ auth, params,response }) {
         let codigoHttp = 200;
@@ -11,7 +12,14 @@ class TelefonoProveedorController {
         const usuario = await auth.getUser();
         try {
             const { id } = params;
-            data = await TelefonoProveedor.query().where('idProveedor', '=', id).fetch();
+            if(id>0){
+                data = await TelefonoProveedor.query().where('idProveedor', '=', id).fetch();
+            }else{
+                data = await Database
+                .table('vistaTelefonosProveedor')
+                       Database.close();
+            }
+            
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

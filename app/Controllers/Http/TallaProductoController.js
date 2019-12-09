@@ -11,7 +11,12 @@ class TallaProductoController {
 
         const usuario = await auth.getUser();
         try {
-            data = await TallaProducto.all();
+            // data = await TallaProducto.all();
+
+            data = await Database
+                .table('vistaTallas')
+            Database.close();
+
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

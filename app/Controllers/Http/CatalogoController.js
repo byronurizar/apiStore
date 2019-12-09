@@ -1,5 +1,6 @@
 'use strict'
 const Catalogo=use('App/Models/Catalogo');
+const Database=use('Database');
 class CatalogoController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class CatalogoController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Catalogo.all();
+            // data = await Catalogo.all();
+            data=await Database
+            .table('vistaCatalogos');
+            Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -36,8 +40,9 @@ class CatalogoController {
         const catalogo = new Catalogo();
         try {
             const usuario = await auth.getUser();
-            const {descripcion,idEstado } = request.all();
+            const {idProveedor,descripcion,idEstado } = request.all();
             catalogo.fill({
+                idProveedor,
                 descripcion,
                 idEstado
             });
@@ -68,7 +73,7 @@ class CatalogoController {
             const usuario = await auth.getUser();
             const { id } = params;
             const catalogo = await Catalogo.find(id);
-            await catalogo.merge(request.only(['descripcion','idEstado']));
+            await catalogo.merge(request.only(['idProveedor','descripcion','idEstado']));
             await catalogo.save();
             data = catalogo;
             respuesta = 'Se actualizo el catálogo exitosamente '

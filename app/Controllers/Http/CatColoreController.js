@@ -11,7 +11,10 @@ class CatColoreController {
 
         const usuario = await auth.getUser();
         try {
-            data = await CatColores.all();
+            // data = await CatColores.all();
+            data = await Database
+            .table('vistaColores')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

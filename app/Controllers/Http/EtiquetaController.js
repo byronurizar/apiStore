@@ -1,5 +1,6 @@
 'use strict'
 const Etiqueta=use('App/Models/CatEtiqueta');
+const Database=use('Database');
 class EtiquetaController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class EtiquetaController {
 
         const usuario = await auth.getUser();
         try {
-            data = await Etiqueta.all();
+            // data = await Etiqueta.all();
+            data = await Database
+            .table('vistaEtiquetas')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

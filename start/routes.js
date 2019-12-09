@@ -89,24 +89,10 @@ Route.group(() => {
   Route.patch('catalogos/actualizar/:id', 'CatalogoController.actualizar');
   Route.get('catalogos/listar', 'CatalogoController.listar');
 
-  //Productos
-  Route.post('productos/registro', 'ProductoController.registrar');
-  Route.patch('productos/actualizar/:id', 'ProductoController.actualizar');
-  Route.get('productos/listar', 'ProductoController.listar');
-  Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
-  Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
-
-  //Info Adicional Producto
-  Route.post('productos/infoadicional/registro', 'InfoAdicionalProductoController.registrar');
-  Route.patch('productos/infoadicional/actualizar/:id', 'InfoAdicionalProductoController.actualizar');
-  Route.get('productos/infoadicional/listar/producto/:id', 'InfoAdicionalProductoController.listar');
-
-
-
-  //Etiquetas a Producto
-  Route.post('etiquetasproducto/registro', 'EtiquetaProductoController.registrar');
-  Route.patch('etiquetasproducto/actualizar/:id', 'EtiquetaProductoController.actualizar');
-  Route.get('etiquetasproducto/listar/producto/:id', 'EtiquetaProductoController.listar');
+  //Estado pedido
+  Route.post('estadopedido/registro', 'CatEstadoPedidoController.registrar');
+  Route.patch('estadopedido/actualizar/:id', 'CatEstadoPedidoController.actualizar');
+  Route.get('estadopedido/listar', 'CatEstadoPedidoController.listar');
 
   //Tipo Pago
   Route.post('tipopago/registro', 'CatTipoPagoController.registrar');
@@ -118,31 +104,6 @@ Route.group(() => {
   Route.patch('tipopago/detalle/actualizar/:id', 'DetalleTipoPagoController.actualizar');
   Route.get('tipopago/detalle/listar', 'DetalleTipoPagoController.listar');
 
-
-  //Stock Producto
-  Route.post('productos/stock/registro', 'StockProductoController.registrar');
-  Route.patch('productos/stock/actualizar/:id', 'StockProductoController.actualizar');
-  Route.get('productos/stock/listar', 'StockProductoController.listar');
-
-  //Imagenes Producto
-  Route.post('productos/imagenes/registro', 'ImagenProductoController.registrar');
-  Route.patch('productos/imagenes/actualizar/:id', 'ImagenProductoController.actualizar');
-  Route.get('productos/imagenes/listar', 'ImagenProductoController.listar');
-  Route.get('productos/imagenes/producto/:id', 'ImagenProductoController.imagenesProducto');
-  Route.post('cargar', 'ImagenProductoController.cargarImagen');
-
-
-
-  //Producto Cruzado
-  Route.post('productoscruzados/registro', 'ProductoCruzadoController.registrar');
-  Route.patch('productoscruzados/actualizar/:id', 'ProductoCruzadoController.actualizar');
-  Route.get('productoscruzados/listar', 'ProductoCruzadoController.listar');
-
-  //Detalle Producto Cruzado
-  Route.post('productoscruzados/detalle/registro', 'DetalleProductoCruzadoController.registrar');
-  Route.patch('productoscruzados/detalle/actualizar/:id', 'DetalleProductoCruzadoController.actualizar');
-  Route.get('productoscruzados/detalle/listar', 'DetalleProductoCruzadoController.listar');
-  Route.get('productoscruzados/detalle/listar/producto/:id', 'DetalleProductoCruzadoController.productosCruzados');
 
   //Persona
   Route.post('personas/registro', 'PersonaController.registrar');
@@ -161,10 +122,48 @@ Route.group(() => {
   Route.get('personas/direcciones/listar', 'DireccionPersonaController.listar');
   Route.get('personas/direcciones/listar/persona/:id', 'DireccionPersonaController.direccionesPersona');
 
-  //Estado pedido
-  Route.post('estadopedido/registro', 'CatEstadoPedidoController.registrar');
-  Route.patch('estadopedido/actualizar/:id', 'CatEstadoPedidoController.actualizar');
-  Route.get('estadopedido/listar', 'CatEstadoPedidoController.listar');
+  //Productos
+  Route.post('productos/registro', 'ProductoController.registrar');
+  Route.patch('productos/actualizar/:id', 'ProductoController.actualizar');
+  Route.get('productos/listar', 'ProductoController.listar');
+  Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
+  Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
+
+  //Info Adicional Producto
+  Route.post('productos/infoadicional/registro', 'InfoAdicionalProductoController.registrar');
+  Route.patch('productos/infoadicional/actualizar/:id', 'InfoAdicionalProductoController.actualizar');
+  Route.get('productos/infoadicional/listar/producto/:id', 'InfoAdicionalProductoController.listar');
+
+  //Etiquetas a Producto
+  Route.post('etiquetasproducto/registro', 'EtiquetaProductoController.registrar');
+  Route.patch('etiquetasproducto/actualizar/:id', 'EtiquetaProductoController.actualizar');
+  Route.get('etiquetasproducto/listar/producto/:id', 'EtiquetaProductoController.listar');
+
+
+  //Stock Producto
+  Route.post('productos/stock/registro', 'StockProductoController.registrar');
+  Route.patch('productos/stock/actualizar/:id', 'StockProductoController.actualizar');
+  Route.get('productos/stock/listar', 'StockProductoController.listar');
+
+  //Imagenes Producto
+  Route.post('productos/imagenes/registro', 'ImagenProductoController.registrar');
+  Route.patch('productos/imagenes/actualizar/:id', 'ImagenProductoController.actualizar');
+  Route.get('productos/imagenes/listar', 'ImagenProductoController.listar');
+  Route.get('productos/imagenes/producto/:id', 'ImagenProductoController.imagenesProducto');
+  Route.post('cargar', 'ImagenProductoController.cargarImagen');
+
+
+  //Producto Cruzado
+  Route.post('productoscruzados/registro', 'ProductoCruzadoController.registrar');
+  Route.patch('productoscruzados/actualizar/:id', 'ProductoCruzadoController.actualizar');
+  Route.get('productoscruzados/listar', 'ProductoCruzadoController.listar');
+
+  //Detalle Producto Cruzado
+  Route.post('productoscruzados/detalle/registro', 'DetalleProductoCruzadoController.registrar');
+  Route.patch('productoscruzados/detalle/actualizar/:id', 'DetalleProductoCruzadoController.actualizar');
+  Route.get('productoscruzados/detalle/listar', 'DetalleProductoCruzadoController.listar');
+  Route.get('productoscruzados/detalle/listar/producto/:id', 'DetalleProductoCruzadoController.productosCruzados');
+
 
   //Pedido
   Route.post('pedido/registro', 'PedidoController.registrar');

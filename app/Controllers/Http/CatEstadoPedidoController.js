@@ -1,5 +1,6 @@
 'use strict'
 const EstadoPedido=use('App/Models/CatEstadoPedido');
+const Database=use('Database');
 class CatEstadoPedidoController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,9 @@ class CatEstadoPedidoController {
 
         const usuario = await auth.getUser();
         try {
-            data = await EstadoPedido.all();
+            data = await Database
+            .table('vistaEstadoPedido')
+                   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

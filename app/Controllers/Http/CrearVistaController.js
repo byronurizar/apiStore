@@ -91,6 +91,34 @@ class CrearVistaController {
             INNER JOIN cat_estados c
             ON a.idEstado=c.id
             WHERE a.idEstado IN(1,2)`);
+            
+
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaEstadoPedido 
+            AS
+            select a.id,a.descripcion,b.descripcion as idEstado from cat_estado_pedidos a
+            inner join cat_estados b
+            on a.idEstado=b.id
+            where a.idEstado in(1,2)`);
+
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaTiposdePago 
+            AS
+            select a.id,a.descripcion,a.esTipoDeposito,b.descripcion as idEstado from cat_tipo_pagos a
+            inner join cat_estados b
+            on a.idEstado=b.id
+            where a.idEstado in(1,2)`);
+
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaDetalleTipoPago
+            AS
+            select a.id,a.nombreBanco,b.descripcion as idTipoPago,a.nombreCuenta,a.numeroCuenta,a.tipoCuenta,c.descripcion as idEstado from detalle_tipo_pagos a
+            inner join cat_tipo_pagos b
+            on a.idTipoPago=b.id
+            inner join cat_estados c
+            on a.idEstado=c.id
+            where a.idEstado in(1,2)`);
+
             Database.close();
         } catch (err) {
             codigoHttp = 500;

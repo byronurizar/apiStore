@@ -1,5 +1,6 @@
 'use strict'
 const DetalleTipoPago=use('App/Models/DetalleTipoPago');
+const Database=use('Database');
 class DetalleTipoPagoController {
     async listar({ auth, response }) {
         let codigoHttp = 200;
@@ -10,7 +11,10 @@ class DetalleTipoPagoController {
 
         const usuario = await auth.getUser();
         try {
-            data = await DetalleTipoPago.all();
+            // data = await DetalleTipoPago.all();
+            data=await Database
+            .table('vistaDetalleTipoPago');
+            Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

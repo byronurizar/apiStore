@@ -24,6 +24,7 @@ Route.group(() => {
   //Usuarios
   Route.post('usuario/registro', 'UsuarioController.store');
   Route.post('usuario/login', 'UsuarioController.login');
+  Route.post('usuario/registrarUsuario', 'UsuarioController.registrarUsuario');
 
   //Estados
   Route.post('estados/registro', 'EstadoController.registrar');

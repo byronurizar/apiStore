@@ -12,12 +12,12 @@ class CategoriaController {
         const usuario = await auth.getUser();
         try {
             //data = await Categoria.all();
-             data = await Database
-             .table('vistaCategorias')
-                    Database.close();
+            data = await Database
+                .table('vistaCategorias')
+            Database.close();
 
             // data=await Database.truncate('cat_estados')
-
+            console.log("Categorias");
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

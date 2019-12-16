@@ -85,7 +85,7 @@ class CrearVistaController {
             data=await Database
             .raw(`CREATE OR REPLACE VIEW vistaCatalogos
             AS
-            SELECT a.id,a.descripcion,b.nombre AS idProveedor,c.descripcion AS idEstado FROM catalogos a
+            SELECT a.id,a.descripcion,b.nombre AS idProveedor,c.descripcion AS idEstado,b.id as proveedorid FROM catalogos a
             INNER JOIN proveedors b
             ON a.idProveedor=b.id
             INNER JOIN cat_estados c

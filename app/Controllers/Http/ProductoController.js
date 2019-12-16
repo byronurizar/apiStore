@@ -142,7 +142,7 @@ class ProductoController {
             const usuario = await auth.getUser();
             const { id } = params;
             const producto = await Producto.find(id);
-            await producto.merge(request.only(['idProveedor', 'idCategoria', 'nombre', 'codigo', 'descripcion', 'descripcionCorta', 'precio', 'idEstado']));
+            await producto.merge(request.only(['idCatalogo', 'idCategoria', 'nombre', 'codigo', 'descripcion', 'descripcionCorta', 'precio','nopagina', 'idEstado']));
 
             await producto.save();
             data = producto;

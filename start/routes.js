@@ -88,7 +88,7 @@ Route.group(() => {
   //Catalogo
   Route.post('catalogos/registro', 'CatalogoController.registrar');
   Route.patch('catalogos/actualizar/:id', 'CatalogoController.actualizar');
-  Route.get('catalogos/listar', 'CatalogoController.listar');
+  Route.get('catalogos/listar/:id?', 'CatalogoController.listar');
 
   //Estado pedido
   Route.post('estadopedido/registro', 'CatEstadoPedidoController.registrar');

@@ -2,7 +2,7 @@
 const Catalogo=use('App/Models/Catalogo');
 const Database=use('Database');
 class CatalogoController {
-    async listar({ auth, response }) {
+    async listar({ auth,params, response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
@@ -12,9 +12,19 @@ class CatalogoController {
         const usuario = await auth.getUser();
         try {
             // data = await Catalogo.all();
-            data=await Database
-            .table('vistaCatalogos');
-            Database.close();
+
+            const { id } = params;
+            if(id>0){
+                data=await Database
+                .table('vistaCatalogos')
+                .where({proveedorid:id});
+                Database.close();
+            }else{
+                data=await Database
+                .table('vistaCatalogos');
+                Database.close();
+            }
+
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

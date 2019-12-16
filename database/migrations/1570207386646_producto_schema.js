@@ -9,7 +9,6 @@ class ProductoSchema extends Schema {
       table.increments()
       table.integer('idCatalogo').unsigned().references('id').inTable('catalogos')
       table.integer('nopagina')//Nuevo campo
-      table.integer('idProveedor').unsigned().references('id').inTable('proveedors')
       table.integer('idCategoria').unsigned().references('id').inTable('cat_categorias')
       table.string('nombre', 100).notNullable()
       table.string('codigo', 100).notNullable().unique()

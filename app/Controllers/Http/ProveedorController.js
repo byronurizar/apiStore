@@ -22,7 +22,7 @@ class ProveedorController {
             respuesta = 'Ocurrió un error al realizar la acción solicitada';
             data = null;
         }
-
+console.log("Consultas ");
         return response.status(codigoHttp).json({
             codigo,
             error,

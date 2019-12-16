@@ -8,7 +8,7 @@ class ProductoSchema extends Schema {
     this.create('productos', (table) => {
       table.increments()
       table.integer('idCatalogo').unsigned().references('id').inTable('catalogos')
-      table.integer('nopagina')
+      table.integer('nopagina')//Nuevo campo
       table.integer('idProveedor').unsigned().references('id').inTable('proveedors')
       table.integer('idCategoria').unsigned().references('id').inTable('cat_categorias')
       table.string('nombre', 100).notNullable()

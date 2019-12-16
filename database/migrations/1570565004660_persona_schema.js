@@ -15,7 +15,7 @@ class PersonaSchema extends Schema {
       table.string('otrosApellidos', 100)
       table.date('fechaNacimiento').notNullable()
       table.integer('idGenero').unsigned().references('id').inTable('cat_generos')
-      table.string('correo', 100).notNullable().unique()
+      table.string('correo', 100).notNullable()
       table.integer('idMunicipio').unsigned().references('id').inTable('cat_municipios')
       table.integer('idEstado').unsigned().references('id').inTable('cat_estados')
       table.integer('user_id').unsigned().references('id').inTable('users')

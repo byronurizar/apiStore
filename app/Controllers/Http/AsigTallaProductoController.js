@@ -1,8 +1,8 @@
 'use strict'
-const Categoria = use('App/Models/CatCategoria');
+const AsigTallaProducto = use('App/Models/AsigTallaProducto');
 const Database = use('Database');
-class CategoriaController {
-    async listar({ auth, response }) {
+class AsigTallaProductoController {
+    async listar({ auth,params, response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
@@ -10,10 +10,11 @@ class CategoriaController {
         let data = null;
 
         const usuario = await auth.getUser();
+        const { id } = params;
         try {
-            //data = await Categoria.all();
             data = await Database
-                .table('vistaCategorias')
+                .table('vistaTallasProducto')
+                .where({productoid:id})
             Database.close();
         } catch (err) {
             codigoHttp = 500;
@@ -37,17 +38,18 @@ class CategoriaController {
         let respuesta = '';
         let data = null;
 
-        const categoria = new Categoria();
+        const productoTalla = new AsigTallaProducto();
         try {
             const usuario = await auth.getUser();
-            const { descripcion, idEstado } = request.all();
-            categoria.fill({
-                descripcion,
+            const { idProducto,idTalla, idEstado } = request.all();
+            productoTalla.fill({
+                idProducto,
+                idTalla,
                 idEstado
             });
-            await usuario.categorias().save(categoria);
-            respuesta = 'Categoria registrada exitosamente'
-            data = categoria;
+            await usuario.asingColorProducto().save(productoTalla);
+            respuesta = 'Se asigno el color exitosamente'
+            data = productoTalla;
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -71,12 +73,11 @@ class CategoriaController {
         try {
             const usuario = await auth.getUser();
             const { id } = params;
-            const categoria = await Categoria.find(id);
-            await categoria.merge(request.only(['descripcion', 'idEstado']));
-
-            await categoria.save();
-            data = categoria;
-            respuesta = 'Categoria actualizada exitosamente';
+            const productoTalla = await AsigTallaProducto.find(id);
+            await productoTalla.merge(request.only(['idProducto','idTalla', 'idEstado']));
+            await productoTalla.save();
+            data = productoTalla;
+            respuesta = 'Color actualizado exitosamente';
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -94,4 +95,4 @@ class CategoriaController {
     }
 }
 
-module.exports = CategoriaController
+module.exports = AsigTallaProductoController

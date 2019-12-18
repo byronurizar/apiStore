@@ -153,6 +153,16 @@ Route.group(() => {
   Route.get('productos/imagenes/producto/:id', 'ImagenProductoController.imagenesProducto');
   Route.post('cargar', 'ImagenProductoController.cargarImagen');
 
+  //Asignación de colores a producto
+  Route.post('productos/asigcolor/registro', 'AsigColorProductoController.registrar');
+  Route.patch('productos/asigcolor/actualizar/:id', 'AsigColorProductoController.actualizar');
+  Route.get('productos/asigcolor/listar/:id', 'AsigColorProductoController.listar');
+
+    //Asignación de tallas a producto
+    Route.post('productos/asigtalla/registro', 'AsigTallaProductoController.registrar');
+    Route.patch('productos/asigtalla/actualizar/:id', 'AsigTallaProductoController.actualizar');
+    Route.get('productos/asigtalla/listar/:id', 'AsigTallaProductoController.listar');
+
 
   //Producto Cruzado
   Route.post('productoscruzados/registro', 'ProductoCruzadoController.registrar');

@@ -115,6 +115,12 @@ class User extends Model {
   detalleTipoPago(){
     return this.hasMany('App/Models/DetalleTipoPago')
   }
+  asingColorProducto(){
+    return this.hasMany('App/Models/AsigColorProducto')
+  }
+  asingTallaProducto(){
+    return this.hasMany('App/Models/AsigTallaProducto')
+  }
 }
 
 module.exports = User

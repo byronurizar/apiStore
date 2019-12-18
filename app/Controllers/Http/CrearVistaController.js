@@ -119,6 +119,40 @@ class CrearVistaController {
             on a.idEstado=c.id
             where a.idEstado in(1,2)`);
 
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaColoresProducto
+            AS
+            select a.id,b.descripcion as idColor,c.descripcion as idEstado,a.idProducto as productoid from asig_color_productos a
+            inner join cat_colores b
+            on a.idColor=b.id
+            inner join cat_estados c
+            on a.idEstado=c.id
+            where a.idEstado in(1,2) and b.idEstado in(1,2)`);
+
+
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaTallasProducto
+            AS
+            select a.id,b.descripcion as idTalla,c.descripcion as idEstado,a.idProducto as productoid from asig_talla_productos a
+            inner join talla_productos b
+            on a.idTalla=b.id
+            inner join cat_estados c
+            on a.idEstado=c.id
+            where a.idEstado in(1,2) and b.idEstado in(1,2)`);
+
+            
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaEtiquetasProducto
+            AS
+            select a.id,b.descripcion as idEtiqueta,c.descripcion as idEstado,a.idProducto as productoid from cat_etiqueta_productos a
+            inner join cat_etiquetas b
+            on a.idEtiqueta=b.id
+            inner join cat_estados c
+            on a.idEstado=c.id
+            where a.idEstado in(1,2) and b.idEstado in(1,2)`);
+
+            
+
             Database.close();
         } catch (err) {
             codigoHttp = 500;

@@ -78,14 +78,14 @@ class ImagenProductoController {
             const { idProducto, esImagenPrincipal, idEstado } = request.all();
             const id = idProducto;
             const producto = await Producto.find(id);
-            const { idProveedor, idCategoria } = producto;
+            const { idCatalogo, idCategoria } = producto;
+
             const fechaActual = new Date();
+
             const anio = fechaActual.getFullYear();
-            const pathImagen = `Imagenes/${anio}/Pro${idProveedor}/Cat${idCategoria}/`;
+            const pathImagen = `Imagenes/${anio}/Catalogo${idCatalogo}/Categoria${idCategoria}/`;
             const extension = '.jpg';
-            const codigoImagen = `${idProveedor}${idCategoria}${Date.now()}${extension}`;
-
-
+            const codigoImagen = `${idCatalogo}${idCategoria}${Date.now()}${extension}`;
 
             const BinarioImagen = request.file('imagen', {
                 types: ['image'],
@@ -145,16 +145,14 @@ class ImagenProductoController {
             const { idProducto } = imagenProducto;
 
             const producto = await Database.select('*').from('productos').where({ id: idProducto });
-
-            //  const { idProveedor, idCategoria } = producto;
-            console.log('Producto', producto);
-            const idProveedor = producto[0].idProveedor;
+            const { idCatalogo, idCategoria } = producto;
+            const idCatalogo = producto[0].idCatalogo;
             const idCategoria = producto[0].idCategoria
             const fechaActual = new Date();
             const anio = fechaActual.getFullYear();
-            const pathImagen = `Imagenes/${anio}/Pro${idProveedor}/Cat${idCategoria}/`;
+            const pathImagen = `Imagenes/${anio}/Catalogo${idCatalogo}/Categoria${idCategoria}/`;
             const extension = '.jpg';
-            const codigoImagen = `${idProveedor}${idCategoria}${Date.now()}${extension}`;
+            const codigoImagen = `${idCatalogo}${idCategoria}${Date.now()}${extension}`;
 
             const BinarioImagen = request.file('imagen', {
                 types: ['image'],

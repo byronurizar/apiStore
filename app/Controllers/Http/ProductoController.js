@@ -104,9 +104,8 @@ class ProductoController {
         const producto = new Producto();
         try {
             const usuario = await auth.getUser();
-            const { idProveedor, idCategoria, nombre, codigo, descripcion, descripcionCorta, precio, idEstado } = request.all();
+            const {idCategoria, nombre, codigo, descripcion, descripcionCorta, precio, idEstado } = request.all();
             producto.fill({
-                idProveedor,
                 idCategoria,
                 nombre,
                 codigo,

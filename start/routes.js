@@ -130,6 +130,8 @@ Route.group(() => {
   Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
   Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
 
+  Route.get('productos/comercio/listar', 'ProductoController.comercioListar');
+  
   //Info Adicional Producto
   Route.post('productos/infoadicional/registro', 'InfoAdicionalProductoController.registrar');
   Route.patch('productos/infoadicional/actualizar/:id', 'InfoAdicionalProductoController.actualizar');

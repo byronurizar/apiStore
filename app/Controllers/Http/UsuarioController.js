@@ -3,11 +3,34 @@ const User = use('App/Models/User');
 const Persona = use('App/Models/Persona');
 const Database = use('Database');
 class UsuarioController {
-    async login({ request, auth }) {
-        const { email, password } = request.all();
+    async login({ request, auth, response }) {
+        let codigoHttp = 200;
+        let codigo = 0;
+        let error = '';
+        let respuesta = '';
+        let data = null;
 
-        const token = await auth.attempt(email, password);
-        return token;
+        const { email, password } = request.all();
+        try {
+            const token = await auth.attempt(email, password);
+            codigo=0;
+            data = token;
+        } catch (err) {
+            codigoHttp = 500;
+            codigo = -1;
+            error = "Usuario y contraseña incorrectos, por favor intente nuevamente";
+            respuesta = 'Ocurrió un error al realizar la acción solicitada';
+            data = null;
+        }
+
+        // return token;
+
+        return response.status(codigoHttp).json({
+            codigo,
+            error,
+            respuesta,
+            data
+        });
 
     }
 

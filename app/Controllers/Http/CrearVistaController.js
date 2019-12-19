@@ -151,6 +151,17 @@ class CrearVistaController {
             on a.idEstado=c.id
             where a.idEstado in(1,2) and b.idEstado in(1,2)`);
 
+
+            data=await Database
+            .raw(`CREATE OR REPLACE VIEW vistaComercioProductos
+            AS
+            select a.id,a.nombre,a.descripcion,a.descripcionCorta,a.precio,b.pathImagen,b.codigoImagen,b.esImagenPrincipal  from productos a
+            inner join imagen_productos b
+            on a.id=b.idProducto
+            where a.idEstado=1 and b.idEstado=1 and b.esImagenPrincipal=1`);
+
+            
+
             
 
             Database.close();

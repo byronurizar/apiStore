@@ -2,14 +2,13 @@
 const AsigTallaProducto = use('App/Models/AsigTallaProducto');
 const Database = use('Database');
 class AsigTallaProductoController {
-    async listar({ auth,params, response }) {
+    async listar({ params, response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
         let respuesta = '';
         let data = null;
 
-        const usuario = await auth.getUser();
         const { id } = params;
         try {
             data = await Database

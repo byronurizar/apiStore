@@ -14,7 +14,7 @@ class CategoriaController {
             //data = await Categoria.all();
             data = await Database
                 .table('vistaCategorias')
-            Database.close();
+                await Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

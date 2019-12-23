@@ -14,7 +14,7 @@ class EtiquetaController {
             // data = await Etiqueta.all();
             data = await Database
             .table('vistaEtiquetas')
-                   Database.close();
+            await Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

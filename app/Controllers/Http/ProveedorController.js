@@ -14,7 +14,7 @@ class ProveedorController {
             // data = await Proveedor.all();
             data = await Database
                 .table('vistaProveedores')
-            Database.close();
+                await Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

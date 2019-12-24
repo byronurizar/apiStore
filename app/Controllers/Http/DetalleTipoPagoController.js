@@ -14,7 +14,7 @@ class DetalleTipoPagoController {
             // data = await DetalleTipoPago.all();
             data=await Database
             .table('vistaDetalleTipoPago');
-            Database.close();
+          //  Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

@@ -14,7 +14,7 @@ class MunicipioController {
             // data = await Municipio.all();
             data = await Database
             .table('vistaMunicipios')
-                   Database.close();
+        //           Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

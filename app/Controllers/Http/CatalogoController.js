@@ -18,11 +18,11 @@ class CatalogoController {
                 data=await Database
                 .table('vistaCatalogos')
                 .where({proveedorid:id});
-                await Database.close();
+          //      await Database.close();
             }else{
                 data=await Database
                 .table('vistaCatalogos');
-                await Database.close();
+             //   await Database.close();
             }
 
         } catch (err) {

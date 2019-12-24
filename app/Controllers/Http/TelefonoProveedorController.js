@@ -17,7 +17,7 @@ class TelefonoProveedorController {
             }else{
                 data = await Database
                 .table('vistaTelefonosProveedor')
-                       Database.close();
+                     //  Database.close();
             }
             
         } catch (err) {

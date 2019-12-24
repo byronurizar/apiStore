@@ -14,7 +14,7 @@ class CatTipoPagoController {
             // data = await TipoPago.all();
             data = await Database
             .table('vistaTiposdePago')
-                   Database.close();
+                  // Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

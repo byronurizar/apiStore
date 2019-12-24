@@ -14,7 +14,7 @@ class CatColoreController {
             // data = await CatColores.all();
             data = await Database
             .table('vistaColores')
-            await Database.close();
+         //   await Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

@@ -15,7 +15,7 @@ class TallaProductoController {
 
             data = await Database
                 .table('vistaTallas')
-            Database.close();
+         //   Database.close();
 
         } catch (err) {
             codigoHttp = 500;

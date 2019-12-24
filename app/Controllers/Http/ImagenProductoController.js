@@ -3,16 +3,16 @@ const Producto = use('App/Models/Producto');
 const ImagenProducto = use('App/Models/ImagenProducto');
 const Database = use('Database');
 class ImagenProductoController {
-    async listar({ auth, response }) {
+    async listar({params, response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
         let respuesta = '';
         let data = null;
-
-        const usuario = await auth.getUser();
+        const { id } = params;
+        console.log("idProducto",id);
         try {
-            data = await ImagenProducto.all();
+            data = await ImagenProducto.query().where('idProducto', '=', id).fetch();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

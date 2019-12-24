@@ -14,7 +14,7 @@ class RolController {
             // data = await Rol.all();
             data = await Database
             .table('vistaRoles')
-                   Database.close();
+            //       Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

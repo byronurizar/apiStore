@@ -13,7 +13,7 @@ class CatEstadoPedidoController {
         try {
             data = await Database
             .table('vistaEstadoPedido')
-                   Database.close();
+              //     Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

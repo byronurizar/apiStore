@@ -14,7 +14,7 @@ class DepartamentoController {
             // data = await Deptartamento.all();
             data = await Database
             .table('vistaDepartamentos')
-                   Database.close();
+              //     Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

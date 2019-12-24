@@ -16,7 +16,7 @@ class EtiquetaProductoController {
             data = await Database
                 .table('vistaEtiquetasProducto')
                 .where({ productoid: id })
-            Database.close();
+           // Database.close();
 
             // .select('productos.id as idProducto',
             //     'productos.nombre as Producto',

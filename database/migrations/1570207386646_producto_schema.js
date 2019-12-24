@@ -15,6 +15,7 @@ class ProductoSchema extends Schema {
       table.string('descripcion', 500)
       table.string('descripcionCorta', 500)
       table.decimal('precio').notNullable()
+      table.decimal('oferta').defaultTo(0)
       table.integer('idEstado').unsigned().references('id').inTable('cat_estados')
       table.integer('user_id').unsigned().references('id').inTable('users')
       table.timestamps()

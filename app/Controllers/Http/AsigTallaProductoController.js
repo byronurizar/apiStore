@@ -14,7 +14,7 @@ class AsigTallaProductoController {
             data = await Database
                 .table('vistaTallasProducto')
                 .where({productoid:id})
-            Database.close();
+          //  Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

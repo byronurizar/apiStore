@@ -131,7 +131,8 @@ Route.group(() => {
   Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
 
   Route.get('productos/comercio/listar', 'ProductoController.comercioListar');
-  
+  Route.get('productos/comercio/infoproducto/:id', 'ProductoController.infoProducto');
+
   //Info Adicional Producto
   Route.post('productos/infoadicional/registro', 'InfoAdicionalProductoController.registrar');
   Route.patch('productos/infoadicional/actualizar/:id', 'InfoAdicionalProductoController.actualizar');
@@ -151,7 +152,7 @@ Route.group(() => {
   //Imagenes Producto
   Route.post('productos/imagenes/registro', 'ImagenProductoController.registrar');
   Route.patch('productos/imagenes/actualizar/:id', 'ImagenProductoController.actualizar');
-  Route.get('productos/imagenes/listar', 'ImagenProductoController.listar');
+  Route.get('productos/imagenes/listar/:id', 'ImagenProductoController.listar');
   Route.get('productos/imagenes/producto/:id', 'ImagenProductoController.imagenesProducto');
   Route.post('cargar', 'ImagenProductoController.cargarImagen');
 
@@ -160,10 +161,10 @@ Route.group(() => {
   Route.patch('productos/asigcolor/actualizar/:id', 'AsigColorProductoController.actualizar');
   Route.get('productos/asigcolor/listar/:id', 'AsigColorProductoController.listar');
 
-    //Asignación de tallas a producto
-    Route.post('productos/asigtalla/registro', 'AsigTallaProductoController.registrar');
-    Route.patch('productos/asigtalla/actualizar/:id', 'AsigTallaProductoController.actualizar');
-    Route.get('productos/asigtalla/listar/:id', 'AsigTallaProductoController.listar');
+  //Asignación de tallas a producto
+  Route.post('productos/asigtalla/registro', 'AsigTallaProductoController.registrar');
+  Route.patch('productos/asigtalla/actualizar/:id', 'AsigTallaProductoController.actualizar');
+  Route.get('productos/asigtalla/listar/:id', 'AsigTallaProductoController.listar');
 
 
   //Producto Cruzado

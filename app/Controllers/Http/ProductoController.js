@@ -12,7 +12,7 @@ class ProductoController {
         try {
             data = await Database
                 .table('vistaComercioProductos')
-        //    Database.close();
+            //    Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -29,7 +29,7 @@ class ProductoController {
         });
     }
 
-    async infoProducto({params, response }) {
+    async infoProducto({ params, response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
@@ -88,7 +88,7 @@ class ProductoController {
                 .innerJoin('proveedors', 'productos.idProveedor', 'proveedors.id')
                 .innerJoin('cat_categorias', 'productos.idCategoria', 'cat_categorias.id')
                 .where(stringWhere);
-         //   Database.close();
+            //   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -131,7 +131,7 @@ class ProductoController {
                 .innerJoin('cat_categorias', 'productos.idCategoria', 'cat_categorias.id')
                 .where({ 'productos.idEstado': 1, 'proveedors.idEstado': 1, 'cat_categorias.idEstado': 1 })
                 .whereBetween('precio', [desde, asta])
-         //   Database.close();
+            //   Database.close();
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
@@ -158,7 +158,7 @@ class ProductoController {
         try {
             const usuario = await auth.getUser();
 
-            const { idCatalogo, nopagina, idCategoria, nombre, codigo, descripcion, descripcionCorta, precio,oferta, idEstado } = request.all();
+            const { idCatalogo, nopagina, idCategoria, nombre, codigo, descripcion, descripcionCorta, precio, oferta, idEstado } = request.all();
             producto.fill({
                 idCatalogo,
                 nopagina,
@@ -198,7 +198,7 @@ class ProductoController {
             const usuario = await auth.getUser();
             const { id } = params;
             const producto = await Producto.find(id);
-            await producto.merge(request.only(['idCatalogo', 'idCategoria', 'nombre', 'codigo', 'descripcion', 'descripcionCorta', 'precio','oferta', 'nopagina', 'idEstado']));
+            await producto.merge(request.only(['idCatalogo', 'idCategoria', 'nombre', 'codigo', 'descripcion', 'descripcionCorta', 'precio', 'oferta', 'nopagina', 'idEstado']));
 
             await producto.save();
             data = producto;

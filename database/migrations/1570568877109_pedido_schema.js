@@ -7,10 +7,9 @@ class PedidoSchema extends Schema {
   up () {
     this.create('pedidos', (table) => {
       table.increments()
-      table.integer('idPersona').unsigned().references('id').inTable('personas')
       table.integer('idTipoPago').unsigned().references('id').inTable('cat_tipo_pagos')
       table.integer('idEstadoPedido').unsigned().references('id').inTable('cat_estado_pedidos')
-      table.integer('user_id').unsigned().references('id').inTable('users')
+      table.integer('user_id')
       table.timestamps()
     })
   }

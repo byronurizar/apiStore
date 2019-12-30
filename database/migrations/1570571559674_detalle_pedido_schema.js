@@ -14,7 +14,6 @@ class DetallePedidoSchema extends Schema {
       table.integer('cantidad').notNullable()
       table.decimal('precio').notNullable()
       table.decimal('descuento')
-      table.integer('user_id').unsigned().references('id').inTable('users')
       table.timestamps()
     })
   }

@@ -2,14 +2,14 @@
 const TipoPago=use('App/Models/CatTipoPago');
 const Database=use('Database');
 class CatTipoPagoController {
-    async listar({ auth, response }) {
+    async listar({ response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
         let respuesta = '';
         let data = null;
 
-        const usuario = await auth.getUser();
+        // const usuario = await auth.getUser();
         try {
             // data = await TipoPago.all();
             data = await Database

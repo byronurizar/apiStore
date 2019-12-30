@@ -189,6 +189,10 @@ Route.group(() => {
   Route.patch('pedido/detalle/actualizar/:id', 'DetallePedidoController.actualizar');
   Route.get('pedido/detalle/listar', 'DetallePedidoController.listar');
 
+
+  //Recibe pedido
+  Route.post('pedido/recibe/registro', 'InfoRecibePedidoController.registrar');
+
   //Configuracion
   Route.get('confi/vistas', 'CrearVistaController.crearVistas');
 

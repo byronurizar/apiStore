@@ -57,6 +57,7 @@ Route.group(() => {
   Route.post('categorias/registro', 'CategoriaController.registrar');
   Route.patch('categorias/actualizar/:id', 'CategoriaController.actualizar');
   Route.get('categorias/listar', 'CategoriaController.listar');
+  Route.get('categorias/listarproveedor/:id', 'CategoriaController.listarPorProveedor');
 
   //Proveedores
   Route.post('proveedores/registro', 'ProveedorController.registrar');
@@ -129,6 +130,8 @@ Route.group(() => {
   Route.get('productos/listar', 'ProductoController.listar');
   Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
   Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
+  Route.get('productos/categoria/:id', 'ProductoController.listarProductoPorCategoria');
+  
 
   Route.get('productos/comercio/listar', 'ProductoController.comercioListar');
   Route.get('productos/comercio/infoproducto/:id', 'ProductoController.infoProducto');

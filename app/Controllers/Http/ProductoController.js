@@ -62,6 +62,38 @@ class ProductoController {
         });
     }
 
+    async listarProductoPorCategoria({ auth,params,response }) {
+        let codigoHttp = 200;
+        let codigo = 0;
+        let error = '';
+        let respuesta = '';
+        let data = null;
+        const usuario = await auth.getUser();
+        try {
+            const { id } = params;
+            data =await Database
+            .select('productos.id','productos.nombre','productos.codigo','productos.precio','productos.oferta')
+            .from('productos')
+            .innerJoin('catalogos','productos.idCatalogo','catalogos.id')
+            .innerJoin('proveedors','catalogos.idProveedor','proveedors.id')
+            .where({'productos.idCategoria':id,'productos.idEstado':1,'catalogos.idEstado':1,'proveedors.idEstado':1})
+        } catch (err) {
+            codigoHttp = 500;
+            codigo = -1;
+            error = err.message;
+            respuesta = 'Ocurrió un error al realizar la acción solicitada';
+            data = null;
+        }
+
+        return response.status(codigoHttp).json({
+            codigo,
+            error,
+            respuesta,
+            data
+        });
+    }
+
+
 
     async listar({ auth, params, response }) {
         let codigoHttp = 200;

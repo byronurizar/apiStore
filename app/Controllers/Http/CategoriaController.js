@@ -30,6 +30,40 @@ class CategoriaController {
             data
         });
     }
+
+    async listarPorProveedor({ auth,params, response }) {
+        let codigoHttp = 200;
+        let codigo = 0;
+        let error = '';
+        let respuesta = '';
+        let data = null;
+
+        const usuario = await auth.getUser();
+        try {
+             const { id } = params;
+             data = await Database
+             .select('cat_categorias.id as idCategoria',
+             'cat_categorias.descripcion as categoria')
+         .from('productos')
+         .innerJoin('catalogos', 'productos.idCatalogo', 'catalogos.id')
+         .innerJoin('cat_categorias', 'productos.idCategoria', 'cat_categorias.id')
+         .where({ 'productos.idEstado': 1, 'catalogos.idEstado': 1, 'cat_categorias.idEstado': 1, "catalogos.idProveedor": id })
+        } catch (err) {
+            codigoHttp = 500;
+            codigo = -1;
+            error = err.message;
+            respuesta = 'Ocurrió un error al realizar la acción solicitada';
+            data = null;
+        }
+
+        return response.status(codigoHttp).json({
+            codigo,
+            error,
+            respuesta,
+            data
+        });
+    }
+
     async registrar({ auth, request, response }) {
         let codigoHttp = 200;
         let codigo = 0;

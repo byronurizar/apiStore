@@ -66,7 +66,7 @@ class DetalleProductoCruzadoController {
         const detalleProductoCruzado = new DetalleProductoCruzado();
         try {
             const usuario = await auth.getUser();
-            const { idProductoCruzado, idProducto, idColor, stockDisponible, idEstado } = request.all();
+            const { idProductoCruzado, idProducto, idEstado } = request.all();
             detalleProductoCruzado.fill({
                 idProductoCruzado,
                 idProducto,

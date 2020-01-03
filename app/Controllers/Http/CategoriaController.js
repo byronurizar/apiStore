@@ -42,12 +42,12 @@ class CategoriaController {
         try {
              const { id } = params;
              data = await Database
-             .select('cat_categorias.id as idCategoria',
-             'cat_categorias.descripcion as categoria')
-         .from('productos')
-         .innerJoin('catalogos', 'productos.idCatalogo', 'catalogos.id')
-         .innerJoin('cat_categorias', 'productos.idCategoria', 'cat_categorias.id')
-         .where({ 'productos.idEstado': 1, 'catalogos.idEstado': 1, 'cat_categorias.idEstado': 1, "catalogos.idProveedor": id })
+             .raw(`select id as idCategoria,descripcion as categoria from cat_categorias
+             where id in(
+             select idCategoria from productos where idCatalogo in(
+             select id from catalogos where idProveedor=${id}
+             )
+             )`)
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

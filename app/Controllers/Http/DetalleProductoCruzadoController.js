@@ -56,6 +56,42 @@ class DetalleProductoCruzadoController {
             data
         });
     }
+
+    async productosCruzadosporProducto({ auth, params, response }) {
+        let codigoHttp = 200;
+        let codigo = 0;
+        let error = '';
+        let respuesta = '';
+        let data = null;
+
+        const usuario = await auth.getUser();
+        const { idProducto } = params;
+        try {
+
+            data = await Database
+                .raw(`select productos.id,productos.nombre,productos.codigo,productos.precio,productos.oferta from productos
+                inner join detalle_producto_cruzados
+                on productos.id=detalle_producto_cruzados.idProducto
+                where detalle_producto_cruzados.idEstado=1 and detalle_producto_cruzados.idProductoCruzado in(
+                select id from producto_cruzados where idProducto=${idProducto}
+                )`);
+                
+        } catch (err) {
+            codigoHttp = 500;
+            codigo = -1;
+            error = err.message;
+            respuesta = 'Ocurrió un error al realizar la acción solicitada';
+            data = null;
+        }
+
+        return response.status(codigoHttp).json({
+            codigo,
+            error,
+            respuesta,
+            data
+        });
+    }
+
     async registrar({ auth, request, response }) {
         let codigoHttp = 200;
         let codigo = 0;

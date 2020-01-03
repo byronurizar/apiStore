@@ -70,13 +70,25 @@ class ProductoController {
         let data = null;
         const usuario = await auth.getUser();
         try {
-            const { id } = params;
+            const { idCatalogo,idProducto } = params;
             data =await Database
-            .select('productos.id','productos.nombre','productos.codigo','productos.precio','productos.oferta')
-            .from('productos')
-            .innerJoin('catalogos','productos.idCatalogo','catalogos.id')
-            .innerJoin('proveedors','catalogos.idProveedor','proveedors.id')
-            .where({'productos.idCategoria':id,'productos.idEstado':1,'catalogos.idEstado':1,'proveedors.idEstado':1})
+            .raw(`select productos.id,productos.nombre,productos.codigo,productos.precio,productos.oferta from productos
+            inner join catalogos
+            on productos.idCatalogo=catalogos.id
+            inner join proveedors
+            on catalogos.idProveedor=proveedors.id
+            where productos.idEstado=1 and catalogos.idEstado=1 and proveedors.idEstado=1 and productos.idCategoria=${idCatalogo}
+            and productos.id not in(
+            select idProducto from detalle_producto_cruzados
+            where idProductoCruzado in(
+            select id from producto_cruzados where idProducto=${idProducto}
+            )
+            )`)
+            // .select('productos.id','productos.nombre','productos.codigo','productos.precio','productos.oferta')
+            // .from('productos')
+            // .innerJoin('catalogos','productos.idCatalogo','catalogos.id')
+            // .innerJoin('proveedors','catalogos.idProveedor','proveedors.id')
+            // .where({'productos.idCategoria':id,'productos.idEstado':1,'catalogos.idEstado':1,'proveedors.idEstado':1})
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;

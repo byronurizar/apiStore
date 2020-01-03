@@ -130,7 +130,7 @@ Route.group(() => {
   Route.get('productos/listar', 'ProductoController.listar');
   Route.get('productos/listar/:tipo/:id', 'ProductoController.listar'); //tipo : proveedor o categoria
   Route.get('productos/listar/precio/:desde/:asta', 'ProductoController.listarPorPrecio');
-  Route.get('productos/categoria/:id', 'ProductoController.listarProductoPorCategoria');
+  Route.get('productos/categoria/:idCatalogo/:idProducto/', 'ProductoController.listarProductoPorCategoria');
   
 
   Route.get('productos/comercio/listar', 'ProductoController.comercioListar');
@@ -179,7 +179,7 @@ Route.group(() => {
   Route.post('productoscruzados/detalle/registro', 'DetalleProductoCruzadoController.registrar');
   Route.patch('productoscruzados/detalle/actualizar/:id', 'DetalleProductoCruzadoController.actualizar');
   Route.get('productoscruzados/detalle/listar', 'DetalleProductoCruzadoController.listar');
-  Route.get('productoscruzados/detalle/listar/producto/:id', 'DetalleProductoCruzadoController.productosCruzados');
+  Route.get('productoscruzados/detalle/listar/producto/:idProducto', 'DetalleProductoCruzadoController.productosCruzadosporProducto');
 
 
   //Pedido

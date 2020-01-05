@@ -69,7 +69,7 @@ class DetalleProductoCruzadoController {
         try {
 
             data = await Database
-                .raw(`select productos.id,productos.nombre,productos.codigo,productos.precio,productos.oferta from productos
+                .raw(`select detalle_producto_cruzados.id,productos.nombre,productos.codigo,productos.precio,productos.oferta from productos
                 inner join detalle_producto_cruzados
                 on productos.id=detalle_producto_cruzados.idProducto
                 where detalle_producto_cruzados.idEstado=1 and detalle_producto_cruzados.idProductoCruzado in(

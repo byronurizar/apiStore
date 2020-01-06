@@ -173,7 +173,7 @@ Route.group(() => {
   //Producto Cruzado
   Route.post('productoscruzados/registro', 'ProductoCruzadoController.registrar');
   Route.patch('productoscruzados/actualizar/:id', 'ProductoCruzadoController.actualizar');
-  Route.get('productoscruzados/listar', 'ProductoCruzadoController.listar');
+  Route.get('productoscruzados/listar/producto/:idProducto', 'ProductoCruzadoController.listarPorProducto');
 
   //Detalle Producto Cruzado
   Route.post('productoscruzados/detalle/registro', 'DetalleProductoCruzadoController.registrar');

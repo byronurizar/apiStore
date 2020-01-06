@@ -1,16 +1,23 @@
 'use strict'
 const ProductoCruzado = use('App/Models/ProductoCruzado');
+const Database = use('Database');
 class ProductoCruzadoController {
-    async listar({ auth, response }) {
+    async listarPorProducto({  params,response }) {
         let codigoHttp = 200;
         let codigo = 0;
         let error = '';
         let respuesta = '';
         let data = null;
 
-        const usuario = await auth.getUser();
+        // const usuario = await auth.getUser();
         try {
-            data = await ProductoCruzado.all();
+            const {idProducto}=params;
+            data =await Database
+            .raw(`select * from vistaComercioProductos where id in(
+                select idProducto from detalle_producto_cruzados where idProductoCruzado in(
+                    select id from producto_cruzados where idProducto=${idProducto}
+                    )
+            )`);
         } catch (err) {
             codigoHttp = 500;
             codigo = -1;
